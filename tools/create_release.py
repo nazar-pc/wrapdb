@@ -65,9 +65,16 @@ class CreateRelease:
             except json.decoder.JSONDecodeError:
                 raise RuntimeError(f'file {fn} is malformed')
 
-            debian_packages = ci.get('debian_packages', [])
+            debian_packages = ci.get(self.name, {}).get('debian_packages', [])
+            print('hello4' + ', '.join(debian_packages))
+            if debian_packages:
+                print('hello4.1')
+            if is_debianlike():
+                print('hello4.2')
             if debian_packages and is_debianlike():
+                print('hello5')
                 if is_ci():
+                    print('hello6')
                     subprocess.check_call(['sudo', 'apt-get', '-y', 'install'] + debian_packages)
                 else:
                     s = ', '.join(debian_packages)
