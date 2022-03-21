@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies for OpenSSL generator
-        run: sudo apt-get install --no-install-recommends nasm libtext-template-perl
       - name: Upload release assets
         run: |
           git fetch --unshallow --tags
